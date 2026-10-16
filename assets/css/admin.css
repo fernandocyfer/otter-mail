@@ -1,0 +1,1328 @@
+/**
+ * OtterMail admin UI.
+ * All rules are scoped to .ottermail-wrap / body.ottermail-admin
+ * so they never restyle other plugins.
+ */
+
+.ottermail-wrap {
+	--om-text: #1d2327;
+	--om-muted: #646970;
+	--om-border: #e2e4e8;
+	--om-surface: #ffffff;
+	--om-accent: #1d4ed8;
+	--om-accent-soft: #eef3ff;
+	--om-ok: #0f766e;
+	--om-ok-soft: #ecfdf5;
+	--om-warn: #b45309;
+	--om-warn-soft: #fff7ed;
+	--om-danger: #b91c1c;
+	--om-danger-soft: #fef2f2;
+	--om-radius: 12px;
+	--om-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
+	box-sizing: border-box;
+	max-width: 1120px;
+	margin-top: 12px;
+	color: var(--om-text);
+}
+
+.ottermail-wrap .ottermail-header,
+.ottermail-wrap .ottermail-header *,
+.ottermail-wrap .ottermail-hero,
+.ottermail-wrap .ottermail-hero *,
+.ottermail-wrap .ottermail-section,
+.ottermail-wrap .ottermail-section *,
+.ottermail-wrap .ottermail-panel,
+.ottermail-wrap .ottermail-panel *,
+.ottermail-wrap .ottermail-card,
+.ottermail-wrap .ottermail-card *,
+.ottermail-wrap .ottermail-grid,
+.ottermail-wrap .ottermail-empty-state,
+.ottermail-wrap .ottermail-preview-panel,
+.ottermail-wrap .ottermail-table {
+	box-sizing: border-box;
+}
+
+.ottermail-wrap > .notice,
+.ottermail-wrap > .updated,
+.ottermail-wrap > .error {
+	margin: 8px 0 16px;
+}
+
+.ottermail-wrap .ottermail-header h1,
+.ottermail-wrap .ottermail-section-head h2,
+.ottermail-wrap .ottermail-panel h2,
+.ottermail-wrap .ottermail-empty-state h2 {
+	color: var(--om-text);
+	font-weight: 600;
+}
+
+.ottermail-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	gap: 16px;
+	margin: 0 0 24px;
+	padding: 18px 20px;
+	background: var(--om-surface);
+	border: 1px solid var(--om-border);
+	border-radius: var(--om-radius);
+	box-shadow: var(--om-shadow);
+}
+
+.ottermail-brand {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	min-width: 0;
+}
+
+.ottermail-brand-mark {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 40px;
+	height: 40px;
+	flex: 0 0 40px;
+	border-radius: 10px;
+	background: var(--om-accent);
+	color: #fff;
+}
+
+.ottermail-brand-name {
+	margin: 0 0 2px;
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--om-accent);
+}
+
+.ottermail-wrap .ottermail-header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 22px;
+	line-height: 1.25;
+	font-weight: 650;
+}
+
+.ottermail-subtitle {
+	margin: 4px 0 0;
+	color: var(--om-muted);
+	font-size: 13px;
+}
+
+.ottermail-header-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+.ottermail-wrap a.ottermail-btn,
+.ottermail-wrap .ottermail-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 8px;
+	padding: 0 14px;
+	height: 36px;
+	line-height: 1;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	border: 1px solid transparent;
+	cursor: pointer;
+	box-shadow: none;
+}
+
+.ottermail-wrap a.ottermail-btn:hover,
+.ottermail-wrap a.ottermail-btn:focus {
+	text-decoration: none;
+	box-shadow: none;
+}
+
+.ottermail-wrap .ottermail-btn-primary {
+	background: var(--om-accent);
+	border-color: var(--om-accent);
+	color: #fff;
+}
+
+.ottermail-wrap .ottermail-btn-primary:hover,
+.ottermail-wrap .ottermail-btn-primary:focus {
+	background: #1e40af;
+	border-color: #1e40af;
+	color: #fff;
+}
+
+.ottermail-wrap .ottermail-btn:disabled,
+.ottermail-wrap .ottermail-btn[disabled] {
+	opacity: 0.45;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+.ottermail-hero {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+	margin: 0 0 24px;
+	padding: 22px 24px;
+	background: linear-gradient(135deg, #1d4ed8 0%, #312e81 100%);
+	color: #fff;
+	border-radius: var(--om-radius);
+}
+
+.ottermail-hero-copy h2 {
+	margin: 0 0 6px;
+	color: #fff;
+	font-size: 18px;
+}
+
+.ottermail-hero-copy p {
+	margin: 0;
+	max-width: 560px;
+	color: rgba(255, 255, 255, 0.86);
+	font-size: 13px;
+	line-height: 1.5;
+}
+
+.ottermail-hero-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	flex-shrink: 0;
+}
+
+.ottermail-wrap .ottermail-hero .ottermail-btn-light {
+	background: #fff;
+	border-color: #fff;
+	color: #1e3a8a;
+}
+
+.ottermail-wrap .ottermail-hero .ottermail-btn-light:hover,
+.ottermail-wrap .ottermail-hero .ottermail-btn-light:focus {
+	background: #eef3ff;
+	border-color: #eef3ff;
+	color: #1e3a8a;
+}
+
+.ottermail-wrap .ottermail-hero .ottermail-btn-ghost {
+	background: transparent;
+	border-color: rgba(255, 255, 255, 0.8);
+	color: #fff;
+}
+
+.ottermail-wrap .ottermail-hero .ottermail-btn-ghost:hover,
+.ottermail-wrap .ottermail-hero .ottermail-btn-ghost:focus {
+	background: rgba(255, 255, 255, 0.14);
+	border-color: #fff;
+	color: #fff;
+}
+
+.ottermail-section {
+	margin: 0 0 22px;
+}
+
+.ottermail-section-head {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: 12px;
+	margin: 0 0 10px;
+}
+
+.ottermail-wrap .ottermail-section-head h2,
+.ottermail-wrap .ottermail-panel h2 {
+	margin: 0;
+	font-size: 14px;
+	letter-spacing: 0.01em;
+}
+
+.ottermail-section-link {
+	font-size: 13px;
+	text-decoration: none;
+	color: var(--om-accent);
+}
+
+.ottermail-section-link:hover {
+	text-decoration: underline;
+}
+
+.ottermail-muted {
+	color: var(--om-muted);
+	font-size: 12px;
+}
+
+.ottermail-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+	gap: 12px;
+	margin: 0 0 8px;
+}
+
+.ottermail-cards-3 {
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ottermail-card {
+	background: var(--om-surface);
+	border: 1px solid var(--om-border);
+	border-radius: var(--om-radius);
+	padding: 16px 18px 14px;
+	box-shadow: var(--om-shadow);
+	min-width: 0;
+}
+
+.ottermail-card-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	margin-bottom: 10px;
+	border-radius: 8px;
+	background: var(--om-accent-soft);
+	color: var(--om-accent);
+}
+
+.ottermail-card-icon svg {
+	width: 18px;
+	height: 18px;
+}
+
+.ottermail-card-icon-ok {
+	background: var(--om-ok-soft);
+	color: var(--om-ok);
+}
+
+.ottermail-card-icon-warn {
+	background: var(--om-warn-soft);
+	color: var(--om-warn);
+}
+
+.ottermail-card-label {
+	color: var(--om-muted);
+	font-size: 12px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.ottermail-card-value {
+	font-size: 26px;
+	font-weight: 650;
+	margin-top: 4px;
+	color: var(--om-text);
+	line-height: 1.2;
+	word-break: break-word;
+}
+
+.ottermail-card-value-price {
+	font-size: 22px;
+}
+
+.ottermail-card-hint {
+	margin: 8px 0 0;
+	color: var(--om-muted);
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.ottermail-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+.ottermail-grid-dashboard {
+	align-items: start;
+}
+
+.ottermail-panel {
+	background: var(--om-surface);
+	border: 1px solid var(--om-border);
+	border-radius: var(--om-radius);
+	padding: 16px 18px 18px;
+	box-shadow: var(--om-shadow);
+}
+
+.ottermail-table {
+	background: var(--om-surface);
+	border: 1px solid var(--om-border) !important;
+	border-radius: var(--om-radius);
+	overflow: hidden;
+	box-shadow: var(--om-shadow);
+}
+
+.ottermail-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 999px;
+	background: #f0f0f1;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.ottermail-badge-sent,
+.ottermail-badge-converted,
+.ottermail-badge-active {
+	background: var(--om-ok-soft);
+	color: var(--om-ok);
+}
+
+.ottermail-badge-processing,
+.ottermail-badge-abandoned,
+.ottermail-badge-draft {
+	background: var(--om-warn-soft);
+	color: var(--om-warn);
+}
+
+.ottermail-badge-failed,
+.ottermail-badge-cancelled {
+	background: var(--om-danger-soft);
+	color: var(--om-danger);
+}
+
+.ottermail-empty-state {
+	background: var(--om-surface);
+	border: 1px dashed #c3c4c7;
+	border-radius: var(--om-radius);
+	padding: 48px 32px;
+	text-align: center;
+}
+
+.ottermail-empty-state h2 {
+	margin: 0 0 8px;
+}
+
+.ottermail-steps {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 20px;
+}
+
+.ottermail-wrap .ottermail-steps a {
+	padding: 8px 12px;
+	background: var(--om-surface);
+	border: 1px solid var(--om-border);
+	border-radius: 8px;
+	text-decoration: none;
+	color: var(--om-text);
+}
+
+.ottermail-wrap .ottermail-steps a.is-active {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+	color: var(--om-accent);
+	font-weight: 600;
+}
+
+.ottermail-preview-panel {
+	margin-top: 28px;
+	background: var(--om-surface);
+	border: 1px solid var(--om-border);
+	border-radius: var(--om-radius);
+	padding: 16px 20px;
+	box-shadow: var(--om-shadow);
+}
+
+.ottermail-preview-toolbar {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 12px;
+}
+
+.ottermail-preview-toolbar strong {
+	margin-right: 8px;
+}
+
+.ottermail-wrap .ottermail-preview-mode.is-active {
+	border-color: var(--om-accent);
+	color: var(--om-accent);
+	background: var(--om-accent-soft);
+}
+
+.ottermail-preview-subject {
+	margin: 0 0 8px;
+	color: var(--om-muted);
+}
+
+.ottermail-preview-frame {
+	border: 1px solid var(--om-border);
+	background: #f4f4f5;
+	min-height: 420px;
+	margin-top: 12px;
+	display: flex;
+	justify-content: center;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.ottermail-preview-frame iframe {
+	width: 100%;
+	min-height: 420px;
+	border: 0;
+	background: #fff;
+}
+
+.ottermail-preview-frame.is-mobile {
+	background: #e5e7eb;
+	padding: 20px 12px 28px;
+	min-height: 680px;
+}
+
+.ottermail-preview-frame.is-mobile iframe {
+	width: 390px;
+	max-width: 100%;
+	min-height: 640px;
+	border-radius: 24px;
+	box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+	border: 8px solid #111827;
+}
+
+.ottermail-muted {
+	color: var(--om-muted);
+	font-size: 12px;
+}
+
+.ottermail-empty {
+	margin: 8px 0 0;
+	color: var(--om-muted);
+}
+
+.ottermail-tiles {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+	margin-top: 12px;
+}
+
+.ottermail-tile {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 12px;
+	border: 1px solid var(--om-border);
+	border-radius: 10px;
+	text-decoration: none;
+	color: var(--om-text);
+	background: #fbfbfc;
+	transition: border-color 0.12s ease, background 0.12s ease;
+}
+
+.ottermail-tile:hover,
+.ottermail-tile:focus {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+	color: var(--om-text);
+	box-shadow: none;
+}
+
+.ottermail-tile-icon {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 34px;
+	height: 34px;
+	flex: 0 0 34px;
+	border-radius: 8px;
+	background: #fff;
+	color: var(--om-accent);
+	border: 1px solid var(--om-border);
+}
+
+.ottermail-tile-icon svg {
+	width: 18px;
+	height: 18px;
+}
+
+.ottermail-tile-title {
+	display: block;
+	font-weight: 600;
+	font-size: 13px;
+}
+
+.ottermail-tile-desc {
+	display: block;
+	margin-top: 2px;
+	color: var(--om-muted);
+	font-size: 12px;
+	line-height: 1.4;
+}
+
+.ottermail-activity {
+	list-style: none;
+	margin: 10px 0 0;
+	padding: 0;
+}
+
+.ottermail-activity-item {
+	display: flex;
+	gap: 10px;
+	padding: 10px 0;
+	border-bottom: 1px solid var(--om-border);
+}
+
+.ottermail-activity-item:last-child {
+	border-bottom: 0;
+	padding-bottom: 0;
+}
+
+.ottermail-activity-dot {
+	width: 8px;
+	height: 8px;
+	margin-top: 6px;
+	flex: 0 0 8px;
+	border-radius: 50%;
+	background: #9ca3af;
+}
+
+.ottermail-tone-success .ottermail-activity-dot {
+	background: var(--om-ok);
+}
+
+.ottermail-tone-warning .ottermail-activity-dot {
+	background: var(--om-warn);
+}
+
+.ottermail-tone-danger .ottermail-activity-dot {
+	background: var(--om-danger);
+}
+
+.ottermail-activity-body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.ottermail-activity-body strong {
+	font-size: 13px;
+}
+
+.ottermail-activity-msg {
+	color: var(--om-text);
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.ottermail-inline-form {
+	display: inline;
+}
+
+.ottermail-media-preview {
+	margin: 0 0 8px;
+}
+
+.ottermail-media-preview img {
+	display: block;
+	max-width: 160px;
+	max-height: 80px;
+	width: auto;
+	height: auto;
+	border: 1px solid var(--om-border);
+	border-radius: 4px;
+	background: #fff;
+	padding: 4px;
+}
+
+.ottermail-media-actions {
+	margin: 8px 0 0;
+}
+
+.ottermail-wrap .ottermail-media-actions .button {
+	margin-right: 6px;
+}
+
+.ottermail-layout {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) 280px;
+	gap: 16px;
+	align-items: start;
+}
+
+.ottermail-layout-main,
+.ottermail-layout-side {
+	min-width: 0;
+}
+
+.ottermail-layout-main > .ottermail-panel + .ottermail-panel {
+	margin-top: 16px;
+}
+
+.ottermail-panel-lead {
+	margin: 0 0 14px;
+	color: var(--om-muted);
+	font-size: 13px;
+	line-height: 1.45;
+}
+
+.ottermail-field {
+	margin: 0 0 16px;
+}
+
+.ottermail-field:last-child {
+	margin-bottom: 0;
+}
+
+.ottermail-field label,
+.ottermail-field-label {
+	display: block;
+	margin: 0 0 6px;
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--om-text);
+}
+
+.ottermail-wrap .ottermail-form input[type="text"],
+.ottermail-wrap .ottermail-form input[type="email"],
+.ottermail-wrap .ottermail-form input[type="url"],
+.ottermail-wrap .ottermail-form input[type="number"],
+.ottermail-wrap .ottermail-form input[type="datetime-local"],
+.ottermail-wrap .ottermail-form select,
+.ottermail-wrap .ottermail-form textarea {
+	width: 100%;
+	max-width: 100%;
+	border: 1px solid var(--om-border);
+	border-radius: 8px;
+	padding: 7px 10px;
+	min-height: 36px;
+	box-shadow: none;
+	background: #fff;
+	color: var(--om-text);
+	line-height: 1.3;
+}
+
+.ottermail-wrap .ottermail-form input[type="number"] {
+	max-width: 140px;
+}
+
+.ottermail-wrap .ottermail-form textarea {
+	min-height: 80px;
+}
+
+.ottermail-wrap .ottermail-form input:focus,
+.ottermail-wrap .ottermail-form select:focus,
+.ottermail-wrap .ottermail-form textarea:focus {
+	border-color: var(--om-accent);
+	box-shadow: 0 0 0 1px var(--om-accent);
+	outline: none;
+}
+
+.ottermail-choice {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+.ottermail-choice-card {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin: 0;
+	padding: 12px 14px 12px 36px;
+	border: 1px solid var(--om-border);
+	border-radius: 10px;
+	background: #fbfbfc;
+	cursor: pointer;
+	position: relative;
+}
+
+.ottermail-choice-card input {
+	position: absolute;
+	left: 12px;
+	top: 14px;
+	margin: 0;
+}
+
+.ottermail-choice-card:has(input:checked) {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+}
+
+.ottermail-choice-title {
+	font-size: 13px;
+	font-weight: 600;
+	color: var(--om-text);
+}
+
+.ottermail-choice-desc {
+	font-size: 12px;
+	color: var(--om-muted);
+	line-height: 1.4;
+}
+
+.ottermail-conditions {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 0;
+	border: 1px solid var(--om-border);
+	border-radius: 10px;
+	overflow: hidden;
+	background: #fff;
+}
+
+.ottermail-conditions th,
+.ottermail-conditions td {
+	padding: 10px;
+	text-align: left;
+	border-bottom: 1px solid var(--om-border);
+	vertical-align: middle;
+}
+
+.ottermail-conditions thead th {
+	background: #f8f9fb;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--om-muted);
+}
+
+.ottermail-conditions tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+#ottermail-conditions td:last-child {
+	width: 44px;
+	text-align: center;
+}
+
+.ottermail-conditions tbody tr:only-child .ottermail-remove-condition {
+	visibility: hidden;
+}
+
+.ottermail-icon-btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	border: 1px solid var(--om-border);
+	border-radius: 8px;
+	background: #fff;
+	color: var(--om-muted);
+	cursor: pointer;
+	font-size: 18px;
+	line-height: 1;
+}
+
+.ottermail-icon-btn:hover,
+.ottermail-icon-btn:focus {
+	border-color: var(--om-danger);
+	color: var(--om-danger);
+	background: var(--om-danger-soft);
+}
+
+.ottermail-panel-actions,
+.ottermail-form-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin: 14px 0 0;
+}
+
+.ottermail-wrap .ottermail-panel > .ottermail-panel-actions {
+	margin-top: 4px;
+}
+
+.ottermail-form-actions {
+	margin: 16px 0 0;
+}
+
+.ottermail-form-actions + .ottermail-field {
+	margin-top: 16px;
+}
+
+.ottermail-wrap .ottermail-btn-secondary {
+	background: #fff;
+	border-color: var(--om-border);
+	color: var(--om-text);
+}
+
+.ottermail-wrap .ottermail-btn-secondary:hover,
+.ottermail-wrap .ottermail-btn-secondary:focus {
+	border-color: var(--om-accent);
+	color: var(--om-accent);
+	background: var(--om-accent-soft);
+}
+
+.ottermail-wrap .ottermail-btn-danger {
+	background: #fff;
+	border-color: var(--om-border);
+	color: var(--om-danger);
+}
+
+.ottermail-wrap .ottermail-btn-danger:hover,
+.ottermail-wrap .ottermail-btn-danger:focus {
+	background: var(--om-danger-soft);
+	border-color: var(--om-danger);
+	color: var(--om-danger);
+}
+
+.ottermail-estimate-card .ottermail-btn {
+	margin-top: 14px;
+	width: 100%;
+}
+
+.ottermail-wrap .ottermail-table thead th {
+	background: #f8f9fb;
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--om-muted);
+}
+
+.ottermail-wrap .ottermail-table td,
+.ottermail-wrap .ottermail-table th {
+	padding: 12px 14px;
+}
+
+.ottermail-wrap .ottermail-table a {
+	font-weight: 600;
+	text-decoration: none;
+	color: var(--om-accent);
+}
+
+.ottermail-wrap .ottermail-panel .form-table {
+	margin: 0;
+}
+
+.ottermail-wrap .ottermail-panel .form-table th {
+	width: 220px;
+	padding: 14px 16px 14px 0;
+	font-weight: 600;
+	color: var(--om-text);
+}
+
+.ottermail-wrap .ottermail-panel .form-table td {
+	padding: 14px 0;
+}
+
+.ottermail-wrap .ottermail-panel .form-table input.regular-text,
+.ottermail-wrap .ottermail-panel .form-table select {
+	max-width: 420px;
+}
+
+.ottermail-filters {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin: 0 0 16px;
+}
+
+.ottermail-filters a {
+	display: inline-flex;
+	align-items: center;
+	padding: 6px 12px;
+	border: 1px solid var(--om-border);
+	border-radius: 999px;
+	background: #fff;
+	color: var(--om-text);
+	text-decoration: none;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.ottermail-filters a:hover,
+.ottermail-filters a.is-active {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+	color: var(--om-accent);
+}
+
+.ottermail-empty-state p {
+	margin: 0 0 16px;
+	color: var(--om-muted);
+}
+
+.ottermail-empty-state .ottermail-btn {
+	margin-top: 4px;
+}
+
+.ottermail-stack {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.ottermail-note {
+	margin: 12px 0 0;
+	color: var(--om-muted);
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+.ottermail-wrap .ottermail-form > .ottermail-panel + .ottermail-panel,
+.ottermail-wrap .ottermail-form > .ottermail-stack {
+	margin-top: 0;
+}
+
+.ottermail-template-system-hint {
+	margin: 0 0 12px;
+	padding: 10px 12px;
+	border-radius: 8px;
+	background: var(--om-accent-soft);
+	color: var(--om-text);
+	font-size: 12px;
+	line-height: 1.45;
+}
+
+.ottermail-campaign-preview {
+	margin-top: 16px;
+}
+
+.ottermail-review-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+}
+
+.ottermail-review-item {
+	padding: 14px 16px;
+	border: 1px solid var(--om-border);
+	border-radius: 10px;
+	background: #fbfbfc;
+	min-width: 0;
+}
+
+.ottermail-review-item strong {
+	display: block;
+	margin: 0 0 6px;
+	color: var(--om-muted);
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.ottermail-review-item p {
+	margin: 0;
+	font-size: 13px;
+	line-height: 1.5;
+	word-break: break-word;
+}
+
+.ottermail-review-edit {
+	margin-top: 12px;
+}
+
+.ottermail-wrap .ottermail-panel .ottermail-form-actions:first-of-type {
+	margin-top: 4px;
+}
+
+.ottermail-wrap.ottermail-is-template-edit {
+	max-width: 1280px;
+}
+
+.ottermail-choice-3 {
+	grid-template-columns: 1fr 1fr 1fr;
+}
+
+.ottermail-builder {
+	display: grid;
+	grid-template-columns: 200px minmax(0, 1fr);
+	gap: 16px;
+	align-items: start;
+}
+
+.ottermail-builder-palette {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	position: sticky;
+	top: 48px;
+}
+
+.ottermail-wrap .ottermail-palette-item {
+	display: block;
+	width: 100%;
+	text-align: left;
+	padding: 10px 12px;
+	border: 1px dashed var(--om-border);
+	border-radius: 8px;
+	background: #fbfbfc;
+	color: var(--om-text);
+	font-size: 13px;
+	font-weight: 600;
+	cursor: grab;
+}
+
+.ottermail-wrap .ottermail-palette-item:hover,
+.ottermail-wrap .ottermail-palette-item:focus {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+	color: var(--om-accent);
+}
+
+.ottermail-builder-canvas {
+	min-height: 280px;
+	padding: 8px;
+	border: 1px dashed var(--om-border);
+	border-radius: 10px;
+	background: #f8f9fb;
+}
+
+.ottermail-builder-empty {
+	margin: 48px 16px;
+	text-align: center;
+	color: var(--om-muted);
+	font-size: 13px;
+}
+
+.ottermail-block {
+	margin: 0 0 10px;
+	background: #fff;
+	border: 1px solid var(--om-border);
+	border-radius: 10px;
+	box-shadow: var(--om-shadow);
+}
+
+.ottermail-block.is-dragging {
+	opacity: 0.45;
+}
+
+.ottermail-block.is-drop-before {
+	box-shadow: 0 -3px 0 var(--om-accent);
+}
+
+.ottermail-block.is-drop-after {
+	box-shadow: 0 3px 0 var(--om-accent);
+}
+
+.ottermail-layout-json {
+	position: absolute !important;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	opacity: 0;
+}
+
+.ottermail-block-body input,
+.ottermail-block-body textarea,
+.ottermail-block-body button {
+	pointer-events: auto;
+	user-select: text;
+}
+
+.ottermail-block-field-wrap {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.ottermail-block-field-wrap span {
+	font-size: 12px;
+	font-weight: 600;
+	color: var(--om-muted);
+}
+
+.ottermail-wrap .ottermail-block-body input,
+.ottermail-wrap .ottermail-block-body textarea {
+	width: 100%;
+	max-width: 100%;
+}
+
+.ottermail-block-handle {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 28px;
+	height: 28px;
+	border-radius: 6px;
+	color: #9ca3af;
+	font-size: 14px;
+	line-height: 1;
+	letter-spacing: -2px;
+	cursor: grab;
+	flex: 0 0 auto;
+}
+
+.ottermail-block-handle:active {
+	cursor: grabbing;
+}
+
+.ottermail-block-head {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	padding: 8px 10px;
+	border-bottom: 1px solid var(--om-border);
+	background: #fbfbfc;
+	border-radius: 10px 10px 0 0;
+	cursor: default;
+}
+
+.ottermail-block-head strong {
+	flex: 1;
+	font-size: 12px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color: var(--om-muted);
+}
+
+.ottermail-block-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 12px;
+}
+
+.ottermail-block-body .ottermail-muted {
+	margin: 0;
+}
+
+.ottermail-builder-palette .ottermail-field-label {
+	margin: 12px 0 0;
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+.ottermail-builder-palette .ottermail-field-label:first-child {
+	margin-top: 0;
+}
+
+.ottermail-wrap .ottermail-palette-item--layout {
+	background: #eef2ff;
+	border-style: solid;
+}
+
+.ottermail-block--section {
+	border-color: #c7d2fe;
+	background: #f8fafc;
+}
+
+.ottermail-block--row {
+	border-color: #dbeafe;
+}
+
+.ottermail-block.is-active {
+	border-color: var(--om-accent);
+}
+
+.ottermail-block-settings {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 12px;
+}
+
+.ottermail-wrap .ottermail-block-settings input,
+.ottermail-wrap .ottermail-block-settings textarea,
+.ottermail-wrap .ottermail-block-settings select {
+	width: 100%;
+	max-width: 100%;
+}
+
+.ottermail-wrap .ottermail-block-settings input[type="checkbox"] {
+	width: auto;
+}
+
+.ottermail-style-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+	gap: 8px;
+}
+
+.ottermail-wrap .ottermail-block-settings .ottermail-color {
+	width: 48px;
+	height: 32px;
+	padding: 2px;
+	cursor: pointer;
+}
+
+.ottermail-check {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 13px;
+}
+
+.ottermail-dropzone--rows {
+	padding: 8px;
+	min-height: 48px;
+}
+
+.ottermail-row-cols {
+	display: flex;
+	gap: 8px;
+	padding: 0 8px 8px;
+	align-items: stretch;
+}
+
+.ottermail-column {
+	min-width: 0;
+	flex: 1;
+	background: #fff;
+	border: 1px dashed #d1d5db;
+	border-radius: 8px;
+	padding: 6px;
+}
+
+.ottermail-column.is-active-drop,
+.ottermail-column.is-drop-target {
+	border-color: var(--om-accent);
+	background: var(--om-accent-soft);
+}
+
+.ottermail-column-label {
+	font-size: 10px;
+	font-weight: 700;
+	color: var(--om-muted);
+	letter-spacing: 0.04em;
+	margin: 0 0 6px;
+}
+
+.ottermail-column-empty {
+	margin: 12px 8px;
+	text-align: center;
+	color: var(--om-muted);
+	font-size: 12px;
+}
+
+.ottermail-dropzone--content {
+	min-height: 56px;
+}
+
+@media (max-width: 960px) {
+	.ottermail-cards-3,
+	.ottermail-grid,
+	.ottermail-tiles,
+	.ottermail-layout,
+	.ottermail-choice,
+	.ottermail-choice-3,
+	.ottermail-review-grid,
+	.ottermail-builder {
+		grid-template-columns: 1fr;
+	}
+
+	.ottermail-builder-palette {
+		position: static;
+		flex-direction: row;
+		flex-wrap: wrap;
+	}
+
+	.ottermail-wrap .ottermail-palette-item {
+		width: auto;
+	}
+
+	.ottermail-hero,
+	.ottermail-header {
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.ottermail-row-cols {
+		flex-direction: column;
+	}
+
+	.ottermail-column {
+		max-width: 100% !important;
+	}
+}
