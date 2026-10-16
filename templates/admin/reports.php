@@ -37,7 +37,7 @@ $status_labels = array(
 );
 
 $title    = __( 'Relatórios', 'ottermail' );
-$subtitle = __( 'Envios, automações e vendas atribuídas ao email. Sem métricas inventadas.', 'ottermail' );
+$subtitle = __( 'Envios, sequências e vendas ligadas ao email.', 'ottermail' );
 include __DIR__ . '/partials-header.php';
 ?>
 <section class="ottermail-section">
@@ -53,7 +53,7 @@ include __DIR__ . '/partials-header.php';
 				echo esc_html(
 					sprintf(
 						/* translators: 1: campaign emails, 2: automation emails */
-						__( '%1$s de campanha e %2$s de automação. Aceitos pelo wp_mail.', 'ottermail' ),
+						__( '%1$s de campanha e %2$s de sequência automática. Não confirma que a pessoa abriu.', 'ottermail' ),
 						number_format_i18n( $num( 'emails_campaign' ) ),
 						number_format_i18n( $num( 'emails_automation' ) )
 					)
@@ -64,12 +64,12 @@ include __DIR__ . '/partials-header.php';
 		<div class="ottermail-card">
 			<div class="ottermail-card-label"><?php esc_html_e( 'Falhas de campanha', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $num( 'emails_failed' ) ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Todos os destinatários recusados pelo transporte, em qualquer campanha.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Pessoas para quem a campanha não foi enviada.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-label"><?php esc_html_e( 'Clientes alcançados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $num( 'customers_reached' ) ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Emails distintos que receberam ao menos uma campanha.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Pessoas diferentes que receberam uma campanha. Emails de carrinho não entram.', 'ottermail' ); ?></p>
 		</div>
 	</div>
 </section>
@@ -82,22 +82,22 @@ include __DIR__ . '/partials-header.php';
 		<div class="ottermail-card">
 			<div class="ottermail-card-label"><?php esc_html_e( 'Links enviados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $num( 'links_sent' ) ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Cada endereço http de campanha e automação. Emails de teste ficam de fora.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Links dos emails enviados desde que o rastreamento começou. Testes não entram.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-label"><?php esc_html_e( 'Cliques', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $num( 'link_clicks' ) ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Vezes que um link enviado foi clicado.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Quantas vezes alguém abriu um link do email.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
-			<div class="ottermail-card-label"><?php esc_html_e( 'Compras após o clique', 'ottermail' ); ?></div>
+			<div class="ottermail-card-label"><?php esc_html_e( 'Compras pelo link', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $num( 'link_purchases' ) ) ); ?></div>
 			<p class="ottermail-card-hint">
 				<?php
 				echo esc_html(
 					sprintf(
 						/* translators: %s: revenue from clicked links */
-						__( 'Primeiro pedido pago no mesmo navegador, dentro da validade do link. Receita: %s.', 'ottermail' ),
+						__( 'A pessoa abriu o link e pagou neste navegador, dentro do prazo. Receita: %s.', 'ottermail' ),
 						html_entity_decode( wp_strip_all_tags( $money( $num( 'link_revenue' ) ) ) )
 					)
 				);
@@ -137,9 +137,9 @@ include __DIR__ . '/partials-header.php';
 				echo esc_html(
 					sprintf(
 						/* translators: 1: restored carts, 2: attributed orders */
-						__( '%1$s restaurados pelo link e %2$s pedidos atribuídos ao email.', 'ottermail' ),
+						__( '%1$s abriram o link e ainda não pagaram. %2$s já compraram.', 'ottermail' ),
 						number_format_i18n( $num( 'carts_restored' ) ),
-						number_format_i18n( (int) $num( 'converted_link' ) + (int) $num( 'converted_assisted' ) )
+						number_format_i18n( $num( 'converted_attributed' ) )
 					)
 				);
 				?>
@@ -148,14 +148,14 @@ include __DIR__ . '/partials-header.php';
 		<div class="ottermail-card">
 			<div class="ottermail-card-label"><?php esc_html_e( 'Receita recuperada', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value ottermail-card-value-price"><?php echo $money( $num( 'recovered_revenue' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Soma dos pedidos pagos depois do link ou de um email de automação.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Pedidos pagos depois que o nosso email saiu, mesmo sem clique.', 'ottermail' ); ?></p>
 		</div>
 	</div>
 </section>
 
 <section class="ottermail-section">
 	<div class="ottermail-section-head">
-		<h2><?php esc_html_e( 'Atribuição das vendas', 'ottermail' ); ?></h2>
+		<h2><?php esc_html_e( 'De onde veio a venda', 'ottermail' ); ?></h2>
 	</div>
 	<table class="widefat striped ottermail-table">
 		<thead>
@@ -172,12 +172,13 @@ include __DIR__ . '/partials-header.php';
 				<td><?php echo $money( $num( 'revenue_link' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 			</tr>
 			<tr>
-				<td><?php esc_html_e( 'Email enviado, sem clique no link', 'ottermail' ); ?></td>
+				<td><?php esc_html_e( 'Compra depois do email', 'ottermail' ); ?></td>
 				<td><?php echo esc_html( number_format_i18n( $num( 'converted_assisted' ) ) ); ?></td>
 				<td><?php echo $money( $num( 'revenue_assisted' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></td>
 			</tr>
 		</tbody>
 	</table>
+	<p class="ottermail-note"><?php esc_html_e( 'A receita recuperada inclui a compra paga depois do envio do email. Compras pelo link só contam quem abriu o link.', 'ottermail' ); ?></p>
 </section>
 
 <section class="ottermail-section">
@@ -234,7 +235,7 @@ include __DIR__ . '/partials-header.php';
 					<th><?php esc_html_e( 'Falhas', 'ottermail' ); ?></th>
 					<th><?php esc_html_e( 'Emails', 'ottermail' ); ?></th>
 					<th><?php esc_html_e( 'Cliques', 'ottermail' ); ?></th>
-					<th><?php esc_html_e( 'Compras', 'ottermail' ); ?></th>
+					<th><?php esc_html_e( 'Compras depois do email', 'ottermail' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -258,7 +259,7 @@ include __DIR__ . '/partials-header.php';
 						<td><?php echo esc_html( number_format_i18n( $automation->failed_count ) ); ?></td>
 						<td><?php echo esc_html( number_format_i18n( $automation->sent_count ) ); ?></td>
 						<td><?php echo esc_html( number_format_i18n( $click_of( 'clicks_automation', $automation->id, 'clicks' ) ) ); ?></td>
-						<td><?php echo esc_html( number_format_i18n( $click_of( 'clicks_automation', $automation->id, 'purchases' ) ) ); ?></td>
+						<td><?php echo esc_html( number_format_i18n( isset( $automation->purchases ) ? $automation->purchases : 0 ) ); ?></td>
 					</tr>
 				<?php endforeach; ?>
 			</tbody>
@@ -283,7 +284,7 @@ include __DIR__ . '/partials-header.php';
 					<th><?php esc_html_e( 'Enviados', 'ottermail' ); ?></th>
 					<th><?php esc_html_e( 'Falhas', 'ottermail' ); ?></th>
 					<th><?php esc_html_e( 'Cliques', 'ottermail' ); ?></th>
-					<th><?php esc_html_e( 'Compras', 'ottermail' ); ?></th>
+					<th><?php esc_html_e( 'Compras pelo link', 'ottermail' ); ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -314,5 +315,5 @@ include __DIR__ . '/partials-header.php';
 	<?php endif; ?>
 </section>
 
-<p class="ottermail-note"><?php esc_html_e( 'O link do email abre o carrinho da loja, ou o endereço salvo nas configurações. O clique e a compra seguinte, no mesmo navegador, entram no relatório. A abertura do email não é medida.', 'ottermail' ); ?></p>
+<p class="ottermail-note"><?php esc_html_e( 'O link do email abre o carrinho da loja, ou o endereço salvo nas configurações. A compra pelo link entra quando a pessoa abre o link e paga neste navegador. A abertura do email não é medida.', 'ottermail' ); ?></p>
 </div>

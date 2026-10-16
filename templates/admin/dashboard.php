@@ -20,12 +20,12 @@ $emails     = (int) $stats['emails_sent'];
 $campaigns  = (int) $stats['campaigns_sent'];
 $customers  = (int) $stats['customers_reached'];
 $abandoned  = (int) $stats['carts_abandoned'];
+$restored   = isset( $stats['carts_restored'] ) ? (int) $stats['carts_restored'] : 0;
+$bought     = isset( $stats['converted_attributed'] ) ? (int) $stats['converted_attributed'] : 0;
 $recovered  = (int) $stats['carts_recovered'];
 $revenue    = $stats['recovered_revenue'];
 $link_clicks = isset( $stats['link_clicks'] ) ? (int) $stats['link_clicks'] : 0;
 $link_orders = isset( $stats['link_purchases'] ) ? (int) $stats['link_purchases'] : 0;
-$pool       = $abandoned + $recovered;
-$rate       = $pool > 0 ? (int) round( ( $recovered / $pool ) * 100 ) : null;
 $is_fresh   = empty( $activity ) && 0 === $emails && 0 === $abandoned && 0 === $campaigns;
 
 $icon = static function ( $name ) {
@@ -68,19 +68,19 @@ $icon = static function ( $name ) {
 			<div class="ottermail-card-icon"><?php echo $icon( 'mail' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Emails enviados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $emails ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Aceitos pelo transporte local (wp_mail).', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Mensagens entregues para envio. Não confirma que a pessoa abriu.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-icon"><?php echo $icon( 'mega' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Campanhas enviadas', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $campaigns ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Campanhas com status enviado.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Campanhas que já foram disparadas.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-icon"><?php echo $icon( 'users' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Clientes alcançados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $customers ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Destinatários únicos em campanhas.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Pessoas diferentes que receberam uma campanha. Emails de carrinho não entram.', 'ottermail' ); ?></p>
 		</div>
 	</div>
 </section>
@@ -95,19 +95,19 @@ $icon = static function ( $name ) {
 			<div class="ottermail-card-icon"><?php echo $icon( 'template' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Links enviados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( isset( $stats['links_sent'] ) ? (int) $stats['links_sent'] : 0 ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Endereços http incluídos em campanhas e automações.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Links dos emails enviados desde que o rastreamento começou.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-icon"><?php echo $icon( 'refresh' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Cliques', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $link_clicks ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Vezes que esses links foram clicados.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Quantas vezes alguém abriu um link do email.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
-			<div class="ottermail-card-icon ottermail-card-icon-ok"><?php echo $icon( 'currency' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
-			<div class="ottermail-card-label"><?php esc_html_e( 'Compras após o clique', 'ottermail' ); ?></div>
+			<div class="ottermail-card-icon ottermail-card-icon-ok"><?php echo $icon( 'cart' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
+			<div class="ottermail-card-label"><?php esc_html_e( 'Compras pelo link', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $link_orders ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Pedidos pagos no mesmo navegador, dentro da validade do link.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'A pessoa abriu o link e pagou neste navegador, dentro do prazo.', 'ottermail' ); ?></p>
 		</div>
 	</div>
 </section>
@@ -122,7 +122,7 @@ $icon = static function ( $name ) {
 			<div class="ottermail-card-icon ottermail-card-icon-warn"><?php echo $icon( 'cart' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
 			<div class="ottermail-card-label"><?php esc_html_e( 'Abandonados', 'ottermail' ); ?></div>
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $abandoned ) ); ?></div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Carrinhos e checkouts ainda sem restauração.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Ainda sem compra.', 'ottermail' ); ?></p>
 		</div>
 		<div class="ottermail-card">
 			<div class="ottermail-card-icon ottermail-card-icon-ok"><?php echo $icon( 'refresh' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></div>
@@ -130,17 +130,14 @@ $icon = static function ( $name ) {
 			<div class="ottermail-card-value"><?php echo esc_html( number_format_i18n( $recovered ) ); ?></div>
 			<p class="ottermail-card-hint">
 				<?php
-				if ( null !== $rate ) {
-					echo esc_html(
-						sprintf(
-							/* translators: %s: recovery percentage */
-							__( '%s%% do volume monitorado (abandonados + recuperados).', 'ottermail' ),
-							number_format_i18n( $rate )
-						)
-					);
-				} else {
-					esc_html_e( 'Restaurados pelo link ou convertidos depois de um email.', 'ottermail' );
-				}
+				echo esc_html(
+					sprintf(
+						/* translators: 1: people who opened the link and have not paid, 2: paid orders after the email or link */
+						__( '%1$s abriram o link e ainda não pagaram. %2$s já compraram.', 'ottermail' ),
+						number_format_i18n( $restored ),
+						number_format_i18n( $bought )
+					)
+				);
 				?>
 			</p>
 		</div>
@@ -150,7 +147,7 @@ $icon = static function ( $name ) {
 			<div class="ottermail-card-value ottermail-card-value-price">
 				<?php echo function_exists( 'wc_price' ) ? wp_kses_post( wc_price( $revenue ) ) : esc_html( $revenue ); ?>
 			</div>
-			<p class="ottermail-card-hint"><?php esc_html_e( 'Pedidos pagos depois do link de recuperação ou de um email de automação.', 'ottermail' ); ?></p>
+			<p class="ottermail-card-hint"><?php esc_html_e( 'Pedidos pagos depois que o nosso email saiu, mesmo sem clique.', 'ottermail' ); ?></p>
 		</div>
 	</div>
 </section>

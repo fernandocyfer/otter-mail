@@ -351,7 +351,11 @@ class CartRepository {
 				(
 					SELECT COUNT(*) FROM {$logs} l
 					WHERE l.object_type = 'cart' AND l.object_id = c.id AND l.event_type = 'automation_email_sent'
-				) AS automation_email_count
+				) AS automation_email_count,
+				(
+					SELECT MIN(l.created_at) FROM {$logs} l
+					WHERE l.object_type = 'cart' AND l.object_id = c.id AND l.event_type = 'automation_email_sent'
+				) AS first_email_at
 			FROM {$table} c
 			WHERE c.status = 'converted'" // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared, WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 		);

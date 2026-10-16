@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       OtterMail
+ * Plugin Name:       OtterMail - Email Marketing para WooCommerce
  * Plugin URI:        https://softjunky.com/products/ottermail/
  * Description:       Email marketing inteligente para WooCommerce — campanhas segmentadas e recuperação de carrinhos abandonados.
  * Version:           1.0.0

@@ -178,6 +178,25 @@ class ClickRepository {
 	}
 
 	/**
+	 * Paid orders already tied to a click, so reports can avoid counting them twice.
+	 *
+	 * @param string $source_type campaign|automation.
+	 * @return array
+	 */
+	public function orders_for_source( $source_type ) {
+		global $wpdb;
+
+		$table = $this->table();
+
+		return $wpdb->get_results(
+			$wpdb->prepare(
+				"SELECT source_id, order_id, order_total FROM {$table} WHERE source_type = %s AND order_id IS NOT NULL", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+				sanitize_key( $source_type )
+			)
+		);
+	}
+
+	/**
 	 * Per-source click and purchase counts.
 	 *
 	 * @param string $source_type campaign|automation.
